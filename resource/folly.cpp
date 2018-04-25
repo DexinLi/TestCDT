@@ -1,5 +1,4 @@
-#include <cstddef>
-#include <utility>
+using size_t = decltype(sizeof(int));
 
 namespace folly {
 	template <typename T>
@@ -27,7 +26,7 @@ namespace folly {
 			/**
 			* \return the number of types in this list.
 			*/
-			static constexpr std::size_t size() noexcept {
+			static constexpr size_t size() noexcept {
 				return sizeof...(Ts);
 			}
 
@@ -199,8 +198,13 @@ using E4 = Cons<
 	void*,
 	Cons<short*, Cons<int*, Cons<void, Cons<short, Cons<int, Nil>>>>>>;
 
+template <class T>
+struct Dummy{
+	static const bool value = true;
+};
 int main()
 {
-	static_assert(std::is_same<T4, E4>::value, "");
+	//static_assert(std::is_same<T4, E4>::value, "");
+	static_assert(Dummy<T4>::value,"");
     return 0;
 }
