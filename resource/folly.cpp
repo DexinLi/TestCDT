@@ -1,8 +1,6 @@
 using size_t = decltype(sizeof(int));
 
 namespace folly {
-	template <typename T>
-	using _t = typename T::type;
 
 	namespace detail {
 
@@ -92,7 +90,7 @@ namespace folly {
 
 		public:
 			template <class... Us>
-			using apply = _t<If<sizeof(try_(0)) - 1 || sizeof...(Us), Empty, Result>>;
+			using apply = typename If<sizeof(try_(0)) - 1 || sizeof...(Us), Empty, Result>::type;
 		};
 
 		/**
